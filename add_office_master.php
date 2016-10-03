@@ -1,4 +1,37 @@
 <?php error_reporting(0); ?>
+<script type="text/javascript">
+function showreportoffice(){
+ var regional_store_id=$("#regional_store_id").val();
+ 
+        
+
+ $.ajax({   
+                    
+   url: "<?php echo base_url();?>MasterForm/add_report_office_master/getvalue",
+   async: false,
+   type: "POST", 
+   data: {'regional_store_id_get':regional_store_id}, 
+   dataType: "html", 
+   success: function(data) {
+  //alert(data);
+   $('#showreportoffice').html(data);
+
+  //$('#modal').modal('hide');
+   return false;
+   
+   
+   
+   }
+ }); 
+ 
+}
+</script>
+
+
+
+
+
+
 <div class="ch-container">
     <div class="row my-container-class">
         <div id="content" class="col-lg-12 col-sm-12">
@@ -32,7 +65,7 @@
 								<div class="form-group col-lg-4">
 									<label class="control-label required">Region Office</label>
 									<div class="controls">
-										<select name="regional_store_id" id="regional_store_id" data-rel="chosen" class="form-control">
+										<select name="regional_store_id" id="regional_store_id" data-rel="chosen" onchange="showreportoffice()" class="form-control">
 											<option value="">Select Region Office</option>
 											<?php foreach($regional_store_master as $regional_store) {  
 											$selected = '';
@@ -52,7 +85,7 @@
 									      }
 										  if($office_master_data->office_operation_type=='showroom'){ echo "Showroom";} 
 										  } ?>
-								<div id="operation_type" class="form-group col-lg-5">
+								<div id="operation_type" class="form-group col-lg-4">
 									<label class="control-label">Operation Type </label>
 									
 									
@@ -62,6 +95,21 @@
 									<input type="radio" name="office_operation_type" id="operation_type2" onclick="showProductSold();"  value="showroom" <?php if($office_master_data->office_operation_type=='showroom'){ echo "checked";} else{ echo set_radio('office_operation_type', 'showroom', TRUE); } ?> >
 									<label class="control-label">Showroom</label>									
 								</div>
+
+<!-- other store -->
+
+<span id="showreportoffice">
+</span>
+
+
+
+
+
+<!--   end  -->
+
+
+
+
 							</div>
 							<hr/>
 							<div class="row">
